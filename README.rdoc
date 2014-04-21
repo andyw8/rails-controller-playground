@@ -1,3 +1,5 @@
+{<img src="https://travis-ci.org/andyw8/rails-controller-playground.svg" alt="Build Status" />}[https://travis-ci.org/andyw8/rails-controller-playground]
+
 == README
 
 I've been trying to discover the best way to write controller specs for Rails. I've seen so many different approaches.
