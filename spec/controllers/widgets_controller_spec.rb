@@ -123,15 +123,19 @@ describe WidgetsController do
   end
 
   describe "DELETE destroy" do
+    let(:widget_double) { mock_model('Widget') }
+
+    before do
+      expect(Widget).to receive(:find).and_return(widget_double)
+    end
+
     it "destroys the requested widget" do
-      widget # reference the 'let' block to trigger the creation
-      expect {
-        delete :destroy, {:id => widget.to_param}, valid_session
-      }.to change(Widget, :count).by(-1)
+      expect(widget_double).to receive(:destroy)
+      delete :destroy, {:id => widget_double.to_param}, valid_session
     end
 
     it "redirects to the widgets list" do
-      delete :destroy, {:id => widget.to_param}, valid_session
+      delete :destroy, {:id => widget_double.to_param}, valid_session
       expect(response).to redirect_to(widgets_url)
     end
   end
