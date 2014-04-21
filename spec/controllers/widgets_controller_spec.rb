@@ -3,7 +3,6 @@ require 'spec_helper'
 describe WidgetsController do
   let(:valid_attributes) { { "name" => "MyString" } }
   let(:valid_session) { {} }
-  let(:widget) { Widget.create! valid_attributes }
   let(:widget_double) { double }
 
   describe "GET index" do
