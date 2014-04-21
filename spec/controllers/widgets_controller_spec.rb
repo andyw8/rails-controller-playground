@@ -7,8 +7,10 @@ describe WidgetsController do
 
   describe "GET index" do
     it "assigns all widgets as @widgets" do
+      widgets = double
+      allow(Widget).to receive(:all).and_return(widgets)
       get :index, {}, valid_session
-      expect(assigns(:widgets)).to eq([widget])
+      expect(assigns(:widgets)).to eq(widgets)
     end
   end
 
