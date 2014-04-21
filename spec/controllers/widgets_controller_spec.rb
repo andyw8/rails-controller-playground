@@ -77,13 +77,13 @@ describe WidgetsController do
   end
 
   describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested widget" do
-        allow(Widget).to receive(:find).with(widget.to_param).and_return(widget)
-        expect(widget).to receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => widget.to_param, :widget => { "name" => "MyString" }}, valid_session
-      end
+    it "updates the requested widget" do
+      allow(Widget).to receive(:find).with(widget.to_param).and_return(widget)
+      expect(widget).to receive(:update).with({ "name" => "MyString" })
+      put :update, {:id => widget.to_param, :widget => { "name" => "MyString" }}, valid_session
+    end
 
+    describe "with valid params" do
       it "assigns the requested widget as @widget" do
         allow(Widget).to receive(:find).and_return(widget)
         allow(widget).to receive(:update).with({ "name" => "MyString" })
