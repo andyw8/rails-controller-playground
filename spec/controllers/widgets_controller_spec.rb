@@ -40,7 +40,6 @@ describe WidgetsController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:widget) { mock_model('Widget') }
       before do
         expect(Widget).to receive(:new).with(valid_attributes).and_return(widget)
       end
@@ -95,7 +94,6 @@ describe WidgetsController do
       end
 
       it "redirects to the widget" do
-        widget = mock_model('Widget')
         allow(Widget).to receive(:find).and_return(widget)
         allow(widget).to receive(:update).with({ "name" => "MyString" }).and_return(true)
         put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
@@ -104,7 +102,6 @@ describe WidgetsController do
     end
 
     describe "with invalid params" do
-      let(:widget) { mock_model('Widget') }
       before do
         expect(widget).to receive(:update).and_return(false)
         expect(Widget).to receive(:find).and_return(widget)
@@ -122,8 +119,6 @@ describe WidgetsController do
   end
 
   describe "DELETE destroy" do
-    let(:widget) { mock_model('Widget') }
-
     before do
       expect(Widget).to receive(:find).and_return(widget)
     end
