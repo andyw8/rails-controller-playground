@@ -42,9 +42,9 @@ describe WidgetsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Widget" do
-        expect {
-          post :create, {:widget => valid_attributes}, valid_session
-        }.to change(Widget, :count).by(1)
+        expect(Widget).to receive(:new).with(valid_attributes).and_return(widget_double)
+        expect(widget_double).to receive(:save)
+        post :create, {:widget => valid_attributes}, valid_session
       end
 
       context "after creation" do
