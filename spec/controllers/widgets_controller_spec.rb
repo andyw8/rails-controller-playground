@@ -46,6 +46,9 @@ describe WidgetsController do
 
         it "assigns a newly created widget as @widget" do
           expect(assigns(:widget)).to be_a(Widget)
+        end
+
+        it "perists the newly created widget" do
           expect(assigns(:widget)).to be_persisted
         end
 
