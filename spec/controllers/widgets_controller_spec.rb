@@ -16,8 +16,8 @@ describe WidgetsController do
 
   describe "GET show" do
     it "assigns the requested widget as @widget" do
-      expect(Widget).to receive(:find).with("7").and_return(widget)
-      get :show, {:id => 7}, valid_session
+      expect(Widget).to receive(:find).with(widget.to_param).and_return(widget)
+      get :show, {:id => widget.to_param}, valid_session
       expect(assigns(:widget)).to eq(widget)
     end
   end
@@ -32,8 +32,8 @@ describe WidgetsController do
 
   describe "GET edit" do
     it "assigns the requested widget as @widget" do
-      expect(Widget).to receive(:find).with("7").and_return(widget)
-      get :edit, {:id => 7}, valid_session
+      expect(Widget).to receive(:find).with(widget.to_param).and_return(widget)
+      get :edit, {:id => widget.to_param}, valid_session
       expect(assigns(:widget)).to eq(widget)
     end
   end
@@ -82,15 +82,15 @@ describe WidgetsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested widget" do
-        expect(Widget).to receive(:find).with("7").and_return(widget)
+        expect(Widget).to receive(:find).with(widget.to_param).and_return(widget)
         expect(widget).to receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => 7, :widget => { "name" => "MyString" }}, valid_session
+        put :update, {:id => widget.to_param, :widget => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested widget as @widget" do
         allow(Widget).to receive(:find).and_return(widget)
         allow(widget).to receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => 7, :widget => valid_attributes}, valid_session
+        put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
         expect(assigns(:widget)).to eq(widget)
       end
 
@@ -98,7 +98,7 @@ describe WidgetsController do
         widget = mock_model('Widget')
         allow(Widget).to receive(:find).and_return(widget)
         allow(widget).to receive(:update).with({ "name" => "MyString" }).and_return(true)
-        put :update, {:id => 7, :widget => valid_attributes}, valid_session
+        put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
         expect(response).to redirect_to(widget)
       end
     end
@@ -108,7 +108,7 @@ describe WidgetsController do
       before do
         expect(widget).to receive(:update).and_return(false)
         expect(Widget).to receive(:find).and_return(widget)
-        put :update, {:id => 7, :widget => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => widget.to_param, :widget => { "name" => "invalid value" }}, valid_session
       end
 
       it "assigns the widget as @widget" do
