@@ -21,3 +21,4 @@ Some topics not addressed yet, but perhaps in a future update
 - Is the `be_a_new` matcher useful?
 - Additional complexity when using nested resources
 
+Please open a pull request if you have a suggestion on how to improve this.
