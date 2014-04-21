@@ -4,3 +4,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+task 'test:prepare' # workaround for https://github.com/rspec/rspec-rails/issues/936
