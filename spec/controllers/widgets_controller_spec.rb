@@ -4,6 +4,7 @@ describe WidgetsController do
   let(:valid_attributes) { { "name" => "MyString" } }
   let(:valid_session) { {} }
   let(:widget) { Widget.create! valid_attributes }
+  let(:widget_double) { double }
 
   describe "GET index" do
     it "assigns all widgets as @widgets" do
@@ -16,7 +17,6 @@ describe WidgetsController do
 
   describe "GET show" do
     it "assigns the requested widget as @widget" do
-      widget_double = double
       expect(Widget).to receive(:find).with("7").and_return(widget_double)
       get :show, {:id => 7}, valid_session
       expect(assigns(:widget)).to eq(widget_double)
@@ -25,7 +25,6 @@ describe WidgetsController do
 
   describe "GET new" do
     it "assigns a new widget as @widget" do
-      widget_double = double
       expect(Widget).to receive(:new).and_return(widget_double)
       get :new, {}, valid_session
       expect(assigns(:widget)).to eq(widget_double)
@@ -34,7 +33,6 @@ describe WidgetsController do
 
   describe "GET edit" do
     it "assigns the requested widget as @widget" do
-      widget_double = double
       expect(Widget).to receive(:find).with("7").and_return(widget_double)
       get :edit, {:id => 7}, valid_session
       expect(assigns(:widget)).to eq(widget_double)
