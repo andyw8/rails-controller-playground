@@ -16,8 +16,10 @@ describe WidgetsController do
 
   describe "GET show" do
     it "assigns the requested widget as @widget" do
-      get :show, {:id => widget.to_param}, valid_session
-      expect(assigns(:widget)).to eq(widget)
+      widget_double = double
+      expect(Widget).to receive(:find).with("7").and_return(widget_double)
+      get :show, {:id => 7}, valid_session
+      expect(assigns(:widget)).to eq(widget_double)
     end
   end
 
