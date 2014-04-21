@@ -47,20 +47,22 @@ describe WidgetsController do
         post :create, {:widget => valid_attributes}, valid_session
       end
 
-      context "after creation" do
-        before { post :create, {:widget => valid_attributes}, valid_session }
+      it "assigns a newly created widget as @widget" do
+        widget_double = mock_model('Widget')
+        expect(widget_double).to receive(:save).and_return(true)
+        expect(Widget).to receive(:new).with(valid_attributes).and_return(widget_double)
+        post :create, {:widget => valid_attributes}, valid_session
+        expect(assigns(:widget)).to eq(widget_double)
+      end
 
-        it "assigns a newly created widget as @widget" do
-          expect(assigns(:widget)).to be_a(Widget)
-        end
+      it "perists the newly created widget" do
+        post :create, {:widget => valid_attributes}, valid_session
+        expect(assigns(:widget)).to be_persisted
+      end
 
-        it "perists the newly created widget" do
-          expect(assigns(:widget)).to be_persisted
-        end
-
-        it "redirects to the created widget" do
-          expect(response).to redirect_to(Widget.last)
-        end
+      it "redirects to the created widget" do
+        post :create, {:widget => valid_attributes}, valid_session
+        expect(response).to redirect_to(Widget.last)
       end
     end
 
