@@ -83,29 +83,37 @@ describe WidgetsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested widget" do
-        expect_any_instance_of(Widget).to receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => widget.to_param, :widget => { "name" => "MyString" }}, valid_session
+        expect(Widget).to receive(:find).with("7").and_return(widget_double)
+        expect(widget_double).to receive(:update).with({ "name" => "MyString" })
+        put :update, {:id => 7, :widget => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested widget as @widget" do
-        put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
-        expect(assigns(:widget)).to eq(widget)
+        allow(Widget).to receive(:find).and_return(widget_double)
+        allow(widget_double).to receive(:update).with({ "name" => "MyString" })
+        put :update, {:id => 7, :widget => valid_attributes}, valid_session
+        expect(assigns(:widget)).to eq(widget_double)
       end
 
       it "redirects to the widget" do
-        put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
-        expect(response).to redirect_to(widget)
+        widget_double = mock_model('Widget')
+        allow(Widget).to receive(:find).and_return(widget_double)
+        allow(widget_double).to receive(:update).with({ "name" => "MyString" }).and_return(true)
+        put :update, {:id => 7, :widget => valid_attributes}, valid_session
+        expect(response).to redirect_to(widget_double)
       end
     end
 
     describe "with invalid params" do
+      let(:widget_double) { mock_model('Widget') }
       before do
-        allow_any_instance_of(Widget).to receive(:save).and_return(false)
-        put :update, {:id => widget.to_param, :widget => { "name" => "invalid value" }}, valid_session
+        expect(widget_double).to receive(:update).and_return(false)
+        expect(Widget).to receive(:find).and_return(widget_double)
+        put :update, {:id => 7, :widget => { "name" => "invalid value" }}, valid_session
       end
 
       it "assigns the widget as @widget" do
-        expect(assigns(:widget)).to eq(widget)
+        expect(assigns(:widget)).to eq(widget_double)
       end
 
       it "re-renders the 'edit' template" do
