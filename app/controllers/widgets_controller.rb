@@ -17,36 +17,24 @@ class WidgetsController < ApplicationController
 
   def create
     @widget = Widget.new(widget_params)
-
-    respond_to do |format|
-      if @widget.save
-        format.html { redirect_to @widget, notice: 'Widget was successfully created.' }
-        format.json { render :show, status: :created, location: @widget }
-      else
-        format.html { render :new }
-        format.json { render json: @widget.errors, status: :unprocessable_entity }
-      end
+    if @widget.save
+      redirect_to @widget, notice: 'Widget was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @widget.update(widget_params)
-        format.html { redirect_to @widget, notice: 'Widget was successfully updated.' }
-        format.json { render :show, status: :ok, location: @widget }
-      else
-        format.html { render :edit }
-        format.json { render json: @widget.errors, status: :unprocessable_entity }
-      end
+    if @widget.update(widget_params)
+      redirect_to @widget, notice: 'Widget was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @widget.destroy
-    respond_to do |format|
-      format.html { redirect_to widgets_url }
-      format.json { head :no_content }
-    end
+    redirect_to widgets_url
   end
 
   private
