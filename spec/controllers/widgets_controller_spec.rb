@@ -80,13 +80,13 @@ describe WidgetsController do
       put :update, {:id => widget.to_param, :widget => { "name" => "MyString" }}, valid_session
     end
 
-    describe "with valid params" do
-      it "assigns the requested widget as @widget" do
-        allow(widget).to receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
-        expect(assigns(:widget)).to eq(widget)
-      end
+    it "assigns the requested widget as @widget" do
+      allow(widget).to receive(:update).with({ "name" => "MyString" })
+      put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
+      expect(assigns(:widget)).to eq(widget)
+    end
 
+    describe "with valid params" do
       it "redirects to the widget" do
         allow(widget).to receive(:update).with({ "name" => "MyString" }).and_return(true)
         put :update, {:id => widget.to_param, :widget => valid_attributes}, valid_session
@@ -96,11 +96,6 @@ describe WidgetsController do
 
     describe "with invalid params" do
       before { allow(widget).to receive(:update).and_return(false) }
-
-      it "assigns the widget as @widget" do
-        put :update, {:id => widget.to_param, :widget => { "name" => "invalid value" }}, valid_session
-        expect(assigns(:widget)).to eq(widget)
-      end
 
       it "re-renders the 'edit' template" do
         put :update, {:id => widget.to_param, :widget => { "name" => "invalid value" }}, valid_session
