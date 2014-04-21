@@ -20,5 +20,6 @@ Some topics not addressed yet, but perhaps in a future update
 - pros/cons of using `allow_any_instance_of` vs referencing the particular instance
 - Is the `be_a_new` matcher useful?
 - Additional complexity when using nested resources
+- The spec requires that model exists for it to run. This is not ideal if doing GOOS-style outside-in development. May be solvable with `stub_const`.
 
 Please open a pull request if you have a suggestion on how to improve this.
