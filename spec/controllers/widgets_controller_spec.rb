@@ -55,11 +55,6 @@ describe WidgetsController do
         expect(assigns(:widget)).to eq(widget_double)
       end
 
-      it "perists the newly created widget" do
-        post :create, {:widget => valid_attributes}, valid_session
-        expect(assigns(:widget)).to be_persisted
-      end
-
       it "redirects to the created widget" do
         post :create, {:widget => valid_attributes}, valid_session
         expect(response).to redirect_to(Widget.last)
