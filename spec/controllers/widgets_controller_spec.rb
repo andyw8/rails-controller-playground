@@ -25,8 +25,10 @@ describe WidgetsController do
 
   describe "GET new" do
     it "assigns a new widget as @widget" do
+      widget_double = double
+      expect(Widget).to receive(:new).and_return(widget_double)
       get :new, {}, valid_session
-      expect(assigns(:widget)).to be_a_new(Widget)
+      expect(assigns(:widget)).to eq(widget_double)
     end
   end
 
