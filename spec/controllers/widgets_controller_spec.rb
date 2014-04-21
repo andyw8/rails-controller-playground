@@ -41,23 +41,26 @@ describe WidgetsController do
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new Widget" do
+      let(:widget_double) { mock_model('Widget') }
+      before do
         expect(Widget).to receive(:new).with(valid_attributes).and_return(widget_double)
+      end
+
+      it "creates a new Widget" do
         expect(widget_double).to receive(:save)
         post :create, {:widget => valid_attributes}, valid_session
       end
 
       it "assigns a newly created widget as @widget" do
-        widget_double = mock_model('Widget')
-        expect(widget_double).to receive(:save).and_return(true)
-        expect(Widget).to receive(:new).with(valid_attributes).and_return(widget_double)
+        expect(widget_double).to receive(:save)
         post :create, {:widget => valid_attributes}, valid_session
         expect(assigns(:widget)).to eq(widget_double)
       end
 
       it "redirects to the created widget" do
+        expect(widget_double).to receive(:save).and_return(true)
         post :create, {:widget => valid_attributes}, valid_session
-        expect(response).to redirect_to(Widget.last)
+        expect(response).to redirect_to(widget_double)
       end
     end
 
