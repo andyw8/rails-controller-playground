@@ -71,7 +71,7 @@ describe WidgetsController do
       end
 
       it "assigns a newly created but unsaved widget as @widget" do
-        expect(assigns(:widget)).to be_a_new(Widget)
+        expect(assigns(:widget)).to be_a_new(Widget) # fix this later
       end
 
       it "re-renders the 'new' template" do
